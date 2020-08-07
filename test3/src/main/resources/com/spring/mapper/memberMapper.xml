@@ -1,10 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.spring.mapper.memberMapper">
-	<!-- 비밀번호 변경 관련 mapper -->
-    
-    <update id = "pass_change" parameterType="hashMap">
-    update member set member_pass=#{member_pass} where e_mail=#{e_mail}
- 
-    </update>
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.user.mapper.userMapper"> 
+<select id="userLogin" resultType="String"> 
+SELECT name from user1 WHERE id=#{id} AND pw=#{pw} 
+</select> 
+<insert id="userJoin"> 
+INSERT INTO user1 (id, pw, name, zipcode, addr1, addr2, phone, email) values (#{id}, #{pw}, #{name}, #{zipcode}, #{addr1}, #{addr2}, #{phone}, #{email}) 
+</insert> 
+<select id="userDetail" resultType="String"> 
+SELECT * from user1 WHERE id=#{id} 
+</select> 
+<update id="userEdit"> 
+UPDATE user1 SET pw=#{pw}, zipcode=#{zipcode}, addr1=#{addr1}, addr2=#{addr2}, phone=#{phone}, email=#{email} WHERE id=#{id} 
+</update> 
+<delete id="userDelete"> 
+DELETE from user1 WHERE id=#{id} 
+</delete> 
+<select id="userFindId" resultType="String"> 
+SELECT id from user1 WHERE name=#{name} and email=#{email} 
+</select> 
+<select id="userFindPw" resultType="String"> 
+SELECT pw from user1 WHERE name=#{name} and id=#{id} and email=#{email} 
+</select> 
+<select id="idCheck" resultType="int"> 
+SELECT count(*) from user1 WHERE id=#{id} 
+</select> 
 </mapper>
+
